@@ -28,18 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void tellJoke(View view) {
         Toast.makeText(this, JokerClass.getJoke(), Toast.LENGTH_SHORT).show();
     }
-
-
 }

@@ -3,8 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_java_library"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Set source to Java library"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_android_library"
+        android:orderInCategory="100"
+        android:title="Set source to Android library"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_google_app_engine"
+        android:orderInCategory="100"
+        android:title="Set source to GAE"
         app:showAsAction="never" />
 </menu>
