@@ -12,4 +12,14 @@ public class MyBean {
     public void setData(String data) {
         myData = data;
     }
+
+    private String joke;
+
+    public String getJoke() {
+        return joke;
+    }
+
+    public void setJoke(String joke) {
+        this.joke = joke;
+    }
 }
