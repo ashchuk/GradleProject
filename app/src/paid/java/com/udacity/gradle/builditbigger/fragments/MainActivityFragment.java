@@ -27,6 +27,7 @@ import static com.udacity.gradle.builditbigger.utils.GAEConnector.getJokeFromApi
 public class MainActivityFragment extends Fragment {
     private static final String ARG_JOKE_TEXT = "JOKE_TEXT";
     private static final int ACTIVITY_REQUEST_CODE = 123;
+    private static final String ERROR_MESSAGE = "Error. Try again";
 
     public static MainActivityFragment newInstance() {
         Bundle args = new Bundle();
@@ -97,12 +98,13 @@ public class MainActivityFragment extends Fragment {
     }
 
     public static class GetJokeAsyncTask extends AsyncTask<Void, Void, String> {
+
         protected String doInBackground(Void... voids) {
             try {
                 return getJokeFromApi();
             } catch (IOException e) {
                 e.printStackTrace();
-                return "Error. Try again";
+                return ERROR_MESSAGE;
             }
         }
     }

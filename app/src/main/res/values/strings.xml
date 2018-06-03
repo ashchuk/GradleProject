@@ -4,4 +4,10 @@
     <string name="button_text">Tell Joke</string>
     <string name="action_settings">Settings</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="free_version_label">Free version</string>
+    <string name="load_joke_label">Load joke</string>
+    <string name="set_source_to_java_library">Set source to Java library</string>
+    <string name="set_source_to_android_library">Set source to Android library</string>
+    <string name="set_source_to_gae">Set source to GAE</string>
+    <string name="paid_version_label">Paid version</string>
 </resources>

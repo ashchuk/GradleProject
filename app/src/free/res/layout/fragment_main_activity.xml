@@ -15,8 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:text="Free version"/>
+        android:layout_marginBottom="@dimen/tv_margin"
+        android:text="@string/free_version_label"/>
 
     <TextView
         android:id="@+id/joke_tv"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         tools:text="asdasd"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/tv_small_margin"
         android:gravity="center"/>
 
     <Button
@@ -34,10 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/joke_tv"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="@dimen/button_margin"
         android:gravity="bottom"
         android:layout_centerHorizontal="true"
-        android:text="Load joke"
+        android:text="@string/load_joke_label"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textColor="@android:color/darker_gray" />
 

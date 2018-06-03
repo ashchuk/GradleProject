@@ -5,16 +5,16 @@
     <item
         android:id="@+id/action_java_library"
         android:orderInCategory="100"
-        android:title="Set source to Java library"
+        android:title="@string/set_source_to_java_library"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_android_library"
         android:orderInCategory="100"
-        android:title="Set source to Android library"
+        android:title="@string/set_source_to_android_library"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_google_app_engine"
         android:orderInCategory="100"
-        android:title="Set source to GAE"
+        android:title="@string/set_source_to_gae"
         app:showAsAction="never" />
 </menu>

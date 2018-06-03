@@ -14,6 +14,7 @@ import static junit.framework.Assert.assertFalse;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class AsyncTaskTest {
+    private static final String ERROR_MESSAGE = "Error. Try again";
 
     public AsyncTaskTest(){
     }
@@ -22,6 +23,6 @@ public class AsyncTaskTest {
     public void testDoInBackground() throws Exception {
         String joke = new MainActivityFragment.GetJokeAsyncTask().execute().get();
         Thread.sleep(10000);
-        assertFalse("Error: Fetched Joke = " + joke, TextUtils.equals(joke,"Error. Try again"));
+        assertFalse("Error: Fetched Joke = " + joke, TextUtils.equals(joke,ERROR_MESSAGE));
     }
 }
