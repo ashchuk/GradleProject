@@ -4,10 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
-import com.ashchuk.ashchuksjavalibrary.JokerClass;
 import com.udacity.gradle.builditbigger.R;
 
 
@@ -29,9 +25,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    public void tellJoke(View view) {
-        Toast.makeText(this, JokerClass.getJoke(), Toast.LENGTH_SHORT).show();
     }
 }
