@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AshchuksAndroidLibrary</string>
+    <string name="close_label">Close</string>
 </resources>

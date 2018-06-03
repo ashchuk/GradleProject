@@ -14,7 +14,6 @@ import com.ashchuk.ashchuksandroidlibrary.JokerLibActivity;
 import com.ashchuk.ashchuksjavalibrary.JokerClass;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.udacity.gradle.builditbigger.R;
 import com.udacity.gradle.builditbigger.utils.JokeSourcePreferences;
 
