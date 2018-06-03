@@ -11,7 +11,8 @@ public class JokerClass {
     }
 
     private static final String[] GAE_JOKES = {
-            "A: I have the perfect son.\n" +
+            "GAE\n" +
+                    "A: I have the perfect son.\n" +
                     "B: Does he smoke?\n" +
                     "A: No, he doesn't.\n" +
                     "B: Does he drink whiskey?\n" +
@@ -21,14 +22,17 @@ public class JokerClass {
                     "B: I guess you really do have the perfect son. How old is he?\n" +
                     "A: He will be six months old next Wednesday.\n",
 
-            "Girl: You would be a good dancer except for two things.\n" +
+            "GAE\n" +
+                    "Girl: You would be a good dancer except for two things.\n" +
                     "Boy: What are the two things?\n" +
                     "Girl: Your feet.\n",
 
-            "Patient: Doctor, I have a pain in my eye whenever I drink tea.\n" +
+            "GAE\n" +
+                    "Patient: Doctor, I have a pain in my eye whenever I drink tea.\n" +
                     "Doctor: Take the spoon out of the mug before you drink.",
 
-            "A: Just look at that young person with the short hair and blue jeans. Is it a boy or a girl?\n" +
+            "GAE\n" +
+                    "A: Just look at that young person with the short hair and blue jeans. Is it a boy or a girl?\n" +
                     "B: It's a girl. She's my daughter.\n" +
                     "A: Oh, I'm sorry, sir. I didn't know that you were her father.\n" +
                     "B: I'm not. I'm her mother.\n"

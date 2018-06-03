@@ -1,6 +1,7 @@
 package com.udacity.gradle.builditbigger.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ashchuk.ashchuksandroidlibrary.JokerLibActivity;
 import com.ashchuk.ashchuksjavalibrary.JokerClass;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -22,6 +24,7 @@ import com.udacity.gradle.builditbigger.utils.JokeSourcePreferences;
 
 public class MainActivityFragment extends Fragment {
     private static final String ARG_JOKE_TEXT = "JOKE_TEXT";
+    private static final int ACTIVITY_REQUEST_CODE = 123;
 
     private InterstitialAd mInterstitialAd;
 
@@ -49,7 +52,9 @@ public class MainActivityFragment extends Fragment {
                     ((TextView) getActivity().findViewById(R.id.joke_tv)).setText(JokerClass.getJoke());
                     break;
                 case JokeSourcePreferences.ANDROID_LIBRARY_SOURCE:
-                    ((TextView) getActivity().findViewById(R.id.joke_tv)).setText(JokerClass.getJoke());
+                    Intent intentStartJokeLibActivity = new Intent(getActivity(), JokerLibActivity.class);
+                    intentStartJokeLibActivity.putExtra(JokerLibActivity.ARG_JOKE_RECEIVED, JokerClass.getJoke());
+                    getActivity().startActivityForResult(intentStartJokeLibActivity, ACTIVITY_REQUEST_CODE);
                     break;
                 case JokeSourcePreferences.GAE_SOURCE:
                     ((TextView) getActivity().findViewById(R.id.joke_tv)).setText(JokerClass.getGAEJoke());
