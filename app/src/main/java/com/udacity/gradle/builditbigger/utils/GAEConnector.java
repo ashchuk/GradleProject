@@ -18,7 +18,6 @@ public class GAEConnector {
             backendApi = builder.build();
         }
 
-        String joke = backendApi.sayJoke().execute().getJoke();
-        return backendApi.sayHi("Hi").execute().getData();
+        return backendApi.sayJoke().execute().getJoke();
     }
 }

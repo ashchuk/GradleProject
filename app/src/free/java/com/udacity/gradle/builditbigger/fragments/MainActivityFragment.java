@@ -2,6 +2,7 @@ package com.udacity.gradle.builditbigger.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,7 +21,13 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.udacity.gradle.builditbigger.R;
+import com.udacity.gradle.builditbigger.utils.GAEConnector;
 import com.udacity.gradle.builditbigger.utils.JokeSourcePreferences;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
+import static com.udacity.gradle.builditbigger.utils.GAEConnector.getJokeFromApi;
 
 public class MainActivityFragment extends Fragment {
     private static final String ARG_JOKE_TEXT = "JOKE_TEXT";
@@ -46,7 +53,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main_activity, container, false);
         ((TextView) rootView.findViewById(R.id.joke_tv)).setText(JokerClass.getJoke());
-        rootView.findViewById(R.id.button_load_joke).setOnClickListener((view) ->{
+        rootView.findViewById(R.id.button_load_joke).setOnClickListener((view) -> {
             switch (JokeSourcePreferences.getJokeFetchType(getActivity())) {
                 case JokeSourcePreferences.JAVA_LIBRARY_SOURCE:
                     ((TextView) getActivity().findViewById(R.id.joke_tv)).setText(JokerClass.getJoke());
@@ -57,7 +64,15 @@ public class MainActivityFragment extends Fragment {
                     getActivity().startActivityForResult(intentStartJokeLibActivity, ACTIVITY_REQUEST_CODE);
                     break;
                 case JokeSourcePreferences.GAE_SOURCE:
-                    ((TextView) getActivity().findViewById(R.id.joke_tv)).setText(JokerClass.getGAEJoke());
+                    GetJokeAsyncTask task = new GetJokeAsyncTask();
+                    try {
+                        String GAEjoke = task.execute().get();
+                        ((TextView) getActivity().findViewById(R.id.joke_tv)).setText(GAEjoke);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
         });
@@ -116,5 +131,16 @@ public class MainActivityFragment extends Fragment {
         super.onSaveInstanceState(outState);
         String currJoke = ((TextView) getActivity().findViewById(R.id.joke_tv)).getText().toString();
         outState.putString(ARG_JOKE_TEXT, currJoke);
+    }
+
+    public class GetJokeAsyncTask extends AsyncTask<Void, Void, String> {
+        protected String doInBackground(Void... voids) {
+            try {
+                return getJokeFromApi();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Error. Try again";
+            }
+        }
     }
 }
