@@ -1,27 +1,21 @@
 package com.udacity.gradle.builditbigger.fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ashchuk.ashchuksandroidlibrary.JokerLibActivity;
 import com.ashchuk.ashchuksjavalibrary.JokerClass;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.udacity.gradle.builditbigger.R;
-import com.udacity.gradle.builditbigger.utils.GAEConnector;
 import com.udacity.gradle.builditbigger.utils.JokeSourcePreferences;
 
 import java.io.IOException;
@@ -32,8 +26,6 @@ import static com.udacity.gradle.builditbigger.utils.GAEConnector.getJokeFromApi
 public class MainActivityFragment extends Fragment {
     private static final String ARG_JOKE_TEXT = "JOKE_TEXT";
     private static final int ACTIVITY_REQUEST_CODE = 123;
-
-    private InterstitialAd mInterstitialAd;
 
     public static MainActivityFragment newInstance() {
         Bundle args = new Bundle();
@@ -76,6 +68,14 @@ public class MainActivityFragment extends Fragment {
                     break;
             }
         });
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        AdView mAdView = rootView.findViewById(R.id.adView);
+        mAdView.loadAd(adRequest);
+
         return rootView;
     }
 
@@ -86,44 +86,12 @@ public class MainActivityFragment extends Fragment {
     }
 
     private void init(Bundle savedInstanceState) {
-        // Create an ad request. Check logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-
-        Activity activity = this.getActivity();
-
-        AdView mAdView = activity.findViewById(R.id.adView);
-        mAdView.loadAd(adRequest);
-
-        mInterstitialAd = new InterstitialAd(activity);
-        mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                requestNewInterstitial();
-            }
-        });
-        requestNewInterstitial();
-
         if (savedInstanceState != null) {
             String currJoke = savedInstanceState.getString(ARG_JOKE_TEXT);
-            ((TextView) activity.findViewById(R.id.joke_tv)).setText(currJoke);
+            ((TextView) getActivity().findViewById(R.id.joke_tv)).setText(currJoke);
         } else {
-            ((TextView) activity.findViewById(R.id.joke_tv)).setText(JokerClass.getJoke());
+            ((TextView) getActivity().findViewById(R.id.joke_tv)).setText(JokerClass.getJoke());
         }
-    }
-
-    private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-
-        mInterstitialAd.loadAd(adRequest);
     }
 
     @Override
@@ -133,7 +101,7 @@ public class MainActivityFragment extends Fragment {
         outState.putString(ARG_JOKE_TEXT, currJoke);
     }
 
-    public class GetJokeAsyncTask extends AsyncTask<Void, Void, String> {
+    public static class GetJokeAsyncTask extends AsyncTask<Void, Void, String> {
         protected String doInBackground(Void... voids) {
             try {
                 return getJokeFromApi();

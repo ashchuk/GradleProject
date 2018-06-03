@@ -13,7 +13,7 @@ public class GAEConnector {
         if (backendApi == null) {
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
-                    .setRootUrl("http://127.0.0.1:8080/_ah/api/")
+                    .setRootUrl("http://192.168.0.7:8080/_ah/api/")
                     .setGoogleClientRequestInitializer(abstractGoogleClientRequest -> abstractGoogleClientRequest.setDisableGZipContent(true));
             backendApi = builder.build();
         }
