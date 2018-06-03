@@ -14,8 +14,6 @@ import javax.inject.Named;
 @Api(
         name = "myApi",
         version = "v1",
-        clientIds = {"123456"},
-        apiKeyRequired = AnnotationBoolean.FALSE,
         namespace = @ApiNamespace(
                 ownerDomain = "backend.builditbigger.gradle.udacity.com",
                 ownerName = "backend.builditbigger.gradle.udacity.com",
