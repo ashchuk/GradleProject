@@ -18,6 +18,7 @@ import com.udacity.gradle.builditbigger.R;
 import com.udacity.gradle.builditbigger.utils.JokeSourcePreferences;
 
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 
 import static com.udacity.gradle.builditbigger.utils.GAEConnector.getJokeFromApi;
@@ -108,6 +109,26 @@ public class MainActivityFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
                 return ERROR_MESSAGE;
+            }
+        }
+    }
+
+    public static class RobustGetJokeAsyncTask extends AsyncTask<Void, Void, String> {
+        private CountDownLatch countDownLatch;
+
+        public RobustGetJokeAsyncTask(CountDownLatch countDownLatch){
+            this.countDownLatch = countDownLatch;
+        }
+
+        protected String doInBackground(Void... voids) {
+            try {
+                return JokerClass.getJoke();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ERROR_MESSAGE;
+            }
+            finally {
+                countDownLatch.countDown();
             }
         }
     }
