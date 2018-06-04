@@ -1,7 +1,6 @@
 package com.udacity.gradle.builditbigger.fragments;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,13 +14,10 @@ import com.ashchuk.ashchuksjavalibrary.JokerClass;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.udacity.gradle.builditbigger.R;
+import com.udacity.gradle.builditbigger.tasks.GetJokeAsyncTask;
 import com.udacity.gradle.builditbigger.utils.JokeSourcePreferences;
 
-import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
-
-import static com.udacity.gradle.builditbigger.utils.GAEConnector.getJokeFromApi;
 
 public class MainActivityFragment extends Fragment {
     private static final String ARG_JOKE_TEXT = "JOKE_TEXT";
@@ -100,36 +96,5 @@ public class MainActivityFragment extends Fragment {
         super.onSaveInstanceState(outState);
         String currJoke = ((TextView) getActivity().findViewById(R.id.joke_tv)).getText().toString();
         outState.putString(ARG_JOKE_TEXT, currJoke);
-    }
-
-    public static class GetJokeAsyncTask extends AsyncTask<Void, Void, String> {
-        protected String doInBackground(Void... voids) {
-            try {
-                return getJokeFromApi();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return ERROR_MESSAGE;
-            }
-        }
-    }
-
-    public static class RobustGetJokeAsyncTask extends AsyncTask<Void, Void, String> {
-        private CountDownLatch countDownLatch;
-
-        public RobustGetJokeAsyncTask(CountDownLatch countDownLatch){
-            this.countDownLatch = countDownLatch;
-        }
-
-        protected String doInBackground(Void... voids) {
-            try {
-                return JokerClass.getJoke();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return ERROR_MESSAGE;
-            }
-            finally {
-                countDownLatch.countDown();
-            }
-        }
     }
 }

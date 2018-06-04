@@ -2,7 +2,6 @@ package com.udacity.gradle.builditbigger.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,17 +13,14 @@ import android.widget.TextView;
 import com.ashchuk.ashchuksandroidlibrary.JokerLibActivity;
 import com.ashchuk.ashchuksjavalibrary.JokerClass;
 import com.udacity.gradle.builditbigger.R;
+import com.udacity.gradle.builditbigger.tasks.GetJokeAsyncTask;
 import com.udacity.gradle.builditbigger.utils.JokeSourcePreferences;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-
-import static com.udacity.gradle.builditbigger.utils.GAEConnector.getJokeFromApi;
 
 public class MainActivityFragment extends Fragment {
     private static final String ARG_JOKE_TEXT = "JOKE_TEXT";
     private static final int ACTIVITY_REQUEST_CODE = 123;
-    private static final String ERROR_MESSAGE = "Error. Try again";
 
     public static MainActivityFragment newInstance() {
         Bundle args = new Bundle();
@@ -92,17 +88,5 @@ public class MainActivityFragment extends Fragment {
         super.onSaveInstanceState(outState);
         String currJoke = ((TextView) getActivity().findViewById(R.id.joke_tv)).getText().toString();
         outState.putString(ARG_JOKE_TEXT, currJoke);
-    }
-
-    public static class GetJokeAsyncTask extends AsyncTask<Void, Void, String> {
-
-        protected String doInBackground(Void... voids) {
-            try {
-                return getJokeFromApi();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return ERROR_MESSAGE;
-            }
-        }
     }
 }

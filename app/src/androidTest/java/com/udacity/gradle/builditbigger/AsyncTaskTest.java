@@ -5,6 +5,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.text.TextUtils;
 
 import com.udacity.gradle.builditbigger.fragments.MainActivityFragment;
+import com.udacity.gradle.builditbigger.tasks.GetJokeAsyncTask;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,7 @@ public class AsyncTaskTest {
 
     @Test
     public void testDoInBackground() throws Exception {
-        String joke = new MainActivityFragment.GetJokeAsyncTask().execute().get();
+        String joke = new GetJokeAsyncTask().execute().get();
         Thread.sleep(10000);
         assertFalse("Error: Fetched Joke = " + joke, TextUtils.equals(joke,ERROR_MESSAGE));
     }

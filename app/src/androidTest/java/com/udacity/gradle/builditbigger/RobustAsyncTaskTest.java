@@ -4,14 +4,12 @@ import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.text.TextUtils;
 
-import com.udacity.gradle.builditbigger.fragments.MainActivityFragment;
+import com.udacity.gradle.builditbigger.tasks.RobustGetJokeAsyncTask;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.concurrent.CountDownLatch;
-
-import javax.security.auth.callback.Callback;
 
 import static junit.framework.Assert.assertFalse;
 
@@ -26,7 +24,7 @@ public class RobustAsyncTaskTest {
     @Test
     public void testDoInBackground() throws Exception {
         final CountDownLatch signal = new CountDownLatch(1);
-        String joke = new MainActivityFragment.RobustGetJokeAsyncTask(signal).execute().get();
+        String joke = new RobustGetJokeAsyncTask(signal).execute().get();
         signal.await();
         assertFalse("Error: Fetched Joke = " + joke, TextUtils.equals(joke,ERROR_MESSAGE));
     }
